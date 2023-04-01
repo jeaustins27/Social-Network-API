@@ -1,4 +1,4 @@
-const names = [
+const username = [
     "Adam",
     "Bill",
     "Craig",
@@ -26,14 +26,14 @@ const names = [
     "Yasmin",
     "Zoey",
   ];
-  const thoughtDescriptions = [
+  const thoughts = [
     "Green apples are the best",
     "Lemonade is the best drink",
     "McDonalds is the best fast food",
     "Call of Duty is the best game",
     "PC is the best gaming platform",
   ];
-  const reactionDescriptions = [
+  const reactions = [
     "Red apples are better",
     "Arnold Palmer is the best drink",
     "I agree with you",
@@ -41,42 +41,46 @@ const names = [
     "PC or nothing!",
   ];
   
-  const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const getRandomArrItem = (item) => {
+    return item[Math.floor(Math.random() * item.length)];
+  };
   
-  const getRandomName = () =>
-    `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+  const genRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
   
-  const getRandomThoughtDescription = (int) => {
-   let results = [];
-   for(let i = 0; i < int; i++) {
+  const getRandomUsername = () => {
+    return `${getRandomArrItem(username)} ${getRandomArrItem(username)} `;
+  };
+
+  const getRandomReaction = (int) => {
+    if (int === 1) {
+      return getRandomArrItem(reactions);
+    }
+  
+    const results = [];
+    for (let i = 0; i < int; i++) {
       results.push({
-        thoughtText: getRandomArrItem(thoughtDescriptions),
-        username: getRandomName(),
-        reactions: [...getThoughtReactions(3)],
+        reactionBody: getRandomArrItem(reactions),
+        username: getRandomUsername(),
       });
     }
     return results;
   };
   
-  
-  const getThoughtReactions = (int) => {
-   if (int === 1) {
-      return getRandomArrItem(reactionDescriptions);
-    }
+  const getRandomThought = (int) => {
     let results = [];
     for (let i = 0; i < int; i++) {
       results.push({
-        reactionBody: getRandomArrItem(reactionDescriptions),
-        username: getRandomName(),
+        thoughtText: getRandomArrItem(thoughts),
+        username: getRandomUsername(),
+        reactions: [...getRandomReaction(2)],
       });
     }
     return results;
   };
   
-  
   module.exports = {
-    getRandomName,
-    getRandomThoughtDescription,
-    getThoughtReactions,
+    getRandomUsername,
     getRandomArrItem,
+    genRandomIndex,
+    getRandomThought,
   };
