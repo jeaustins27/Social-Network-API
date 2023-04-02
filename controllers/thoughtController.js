@@ -26,7 +26,7 @@ module.exports = {
       .then((thought) => {
         return User.findOneAndUpdate(
           { _id: req.params.userId },
-          { $addToSet: { thougths: thought._id } },
+          { $addToSet: { thoughts: thought._id } },
           { runValidators: true, new: true }
         ).then((thought) =>
           !thought
@@ -75,7 +75,7 @@ module.exports = {
           !thought
             ? res
               .status(400)
-              .json({ message: "Thought created but no user was found" })
+              .json({ message: "Thought deleted but no user was found" })
             : res
               .status(200)
               .json({ message: "Thought has been deleted" })
